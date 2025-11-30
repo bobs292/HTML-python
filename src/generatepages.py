@@ -1,7 +1,7 @@
 import os
 from generatepage import generate_page
 
-def generate_pages_recursive(dir_path_content, template_path, dest_dir_path):
+def generate_pages_recursive(dir_path_content, template_path, dest_dir_path, basepath="/"):
     """
     Generate HTML pages for all markdown files in a directory tree
     """
@@ -22,4 +22,4 @@ def generate_pages_recursive(dir_path_content, template_path, dest_dir_path):
                 print(f"Generating: {md_file_path} -> {dest_file_path}")
                 
                 # Generate the page
-                generate_page(md_file_path, template_path, dest_file_path)
+                generate_page(md_file_path, template_path, dest_file_path, basepath)

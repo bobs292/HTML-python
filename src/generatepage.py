@@ -1,7 +1,7 @@
 from blocktypes import extract_title, markdown_to_html_node
 import os
 
-def generate_page(from_path, template_path, dest_path):
+def generate_page(from_path, template_path, dest_path, basepath="/"):
     print(f"Generating page from {from_path} to {dest_path} using {template_path}")
     
     # Read the markdown file
@@ -16,6 +16,12 @@ def generate_page(from_path, template_path, dest_path):
     title = extract_title(markdown)
     node = markdown_to_html_node(markdown)
     html = node.to_html()
+    
+    # Replace basepath in href and src attributes in both template and content
+    template = template.replace('href="/', f'href="{basepath}')
+    template = template.replace('src="/', f'src="{basepath}')
+    html = html.replace('href="/', f'href="{basepath}')
+    html = html.replace('src="/', f'src="{basepath}')
     
     # Replace placeholders in template
     template = template.replace('{{ Title }}', title)
